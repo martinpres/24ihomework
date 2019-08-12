@@ -1,10 +1,6 @@
 'use strict';
 
 // provided by google
-/*var API_KEY = 'AIzaSyCJFTff633yvFiD9jg2qit3Nc2juj8batM';
-var API_CX = '017040271195194510670:p3jypfko7xo';*/
-
-// DEV api key
 var API_KEY = 'AIzaSyBSYXQZ8TtlPD5BjPqacbXWsfaBu2SoZjY';
 var API_CX = '017040271195194510670:csfaunyoaoe';
 
