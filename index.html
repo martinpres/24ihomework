@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>24i Media Homework</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Homework for job interview at 24i Media.">
+        <meta name="author" content="Martin Pres">
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="content">
+            <div id="userInputContainer">
+                <input id="searchQueryInput" class="bordered smallerRadius bigFont" type="text" placeholder="Search..">
+                <button id="searchQuerySubmit" class="bordered smallerRadius bigFont" type="submit">Search</button>
+            </div>
+            
+            <div id="imagesWrap" class="bordered biggerRadius blankBg">
+                <div class="sectionTitle bigFont">Image result</div>
+                <div id="images" class="results"></div>
+            </div>
+            
+            <div id="webWrap" class="bordered biggerRadius blankBg">
+                <div class="sectionTitle bigFont">Web result</div>
+                <div id="web" class="results"></div>
+                <div id="webPaginator"></div>
+            </div>
+        </div>
+
+        <noscript>
+            <p class="noscript-msg">
+                We are sorry, but your browser does not support JavaScript
+                (or has JavaScript disabled). If you  want to see content
+                of this page, please enable JavaScript or use browser which
+                supports JavaScript.
+            </p>
+        </noscript> 
+
+        <script src="CustomSearch.js"></script>
+        <script src="View.js"></script>
+    </body>
+</html>
