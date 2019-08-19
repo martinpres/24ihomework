@@ -29,7 +29,7 @@ function CustomQuery (apiKey, cx) {
     // response from api call
     this.result={};
 
-    this.BuildCallUrl();
+    this.buildCallUrl();
 }
 
 
@@ -37,7 +37,7 @@ function CustomQuery (apiKey, cx) {
  * Prepares base call url.
  * @return int
  */
-CustomQuery.prototype.BuildCallUrl = function() {
+CustomQuery.prototype.buildCallUrl = function() {
     this.callurl = this.baseurl + this.version + '?key=' + this.apiKey + '&cx=' + this.cx;
     this.callurl += '&prettyPrint=' + this.prettyPrint.toString();
     return 0;
@@ -52,8 +52,8 @@ CustomQuery.prototype.BuildCallUrl = function() {
  * @param resultCnt Maximum number of returned results (google api enforces max 10 results per call)
  * @return int
  */
-CustomQuery.prototype.QueryWeb = function(query, callback, start, resultCnt) {
-    return this.SearchApiRequest(query, callback, start, this.webResultFields, false, resultCnt);
+CustomQuery.prototype.queryWeb = function(query, callback, start, resultCnt) {
+    return this.searchApiRequest(query, callback, start, this.webResultFields, false, resultCnt);
 };
 
 
@@ -65,8 +65,8 @@ CustomQuery.prototype.QueryWeb = function(query, callback, start, resultCnt) {
  * @param resultCnt Maximum number of returned results (google api enforces max 10 results per call)
  * @return int
  */
-CustomQuery.prototype.QueryImg = function(query, callback, start, resultCnt) {
-    return this.SearchApiRequest(query, callback, start, this.imageResultFields, true, resultCnt);
+CustomQuery.prototype.queryImg = function(query, callback, start, resultCnt) {
+    return this.searchApiRequest(query, callback, start, this.imageResultFields, true, resultCnt);
 };
 
 
@@ -81,7 +81,7 @@ CustomQuery.prototype.QueryImg = function(query, callback, start, resultCnt) {
  * @param resultCnt Maximum number of returned results (google api enforces max 10 results per call)
  * @return int
  */
-CustomQuery.prototype.SearchApiRequest = function(query, callback, start, fields, imageSearch, resultCnt) {
+CustomQuery.prototype.searchApiRequest = function(query, callback, start, fields, imageSearch, resultCnt) {
     if (query === undefined) query = '';
     if (callback === undefined) return 0;
     if (start === undefined) start = 1;
@@ -101,18 +101,16 @@ CustomQuery.prototype.SearchApiRequest = function(query, callback, start, fields
     var xhttp = null;
     if (window.XMLHttpRequest) {        // firefox & gang 
         xhttp = new XMLHttpRequest();
-    } /*else if (window.ActiveXObject) {  // ie (uncomment if ie is supported)
-        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }*/
+    }
 
     if (xhttp === null) {
-        errObj = self.GetError(E_OBJ_HTTP);
+        errObj = self.getError(E_OBJ_HTTP);
         callback(self.result, start, errObj);
         return 0;
     }
     
     xhttp.onerror = function() {
-        var errObj = self.GetError(E_XMLHTTP_EROR);
+        var errObj = self.getError(E_XMLHTTP_EROR);
         callback(self.result, errObj);
     }
 
@@ -135,7 +133,7 @@ CustomQuery.prototype.SearchApiRequest = function(query, callback, start, fields
                     }
                 }
     
-                errObj = self.GetError(errmsg, params);
+                errObj = self.getError(errmsg, params);
                 
             } else {
                 // 200 OK
@@ -161,8 +159,8 @@ CustomQuery.prototype.SearchApiRequest = function(query, callback, start, fields
  * @param callback A callback function which will receive the result set.
  * @return int
  */
-CustomQuery.prototype.GetWebResultsFromIndex = function(start, resultCnt, callback) {
-    return this.SearchApiRequest(this.query, callback, start, this.webResultFields, false, resultCnt);
+CustomQuery.prototype.getWebResultsFromIndex = function(start, resultCnt, callback) {
+    return this.searchApiRequest(this.query, callback, start, this.webResultFields, false, resultCnt);
 };
 
 
@@ -174,8 +172,8 @@ CustomQuery.prototype.GetWebResultsFromIndex = function(start, resultCnt, callba
  * @param callback A callback function which will receive the result set.
  * @return int
  */
-CustomQuery.prototype.GetImageResultsFromIndex = function(start,callback) {
-    return this.SearchApiRequest(this.query, callback, start, this.webResultFields, true);
+CustomQuery.prototype.getImageResultsFromIndex = function(start,callback) {
+    return this.searchApiRequest(this.query, callback, start, this.webResultFields, true);
 };
 
 
@@ -186,7 +184,7 @@ CustomQuery.prototype.GetImageResultsFromIndex = function(start,callback) {
  * @param parameters An array of values which are passed to the msg argument.
  * @return object
  */
-CustomQuery.prototype.GetError = function(msg, parameters) {
+CustomQuery.prototype.getError = function(msg, parameters) {
     if (parameters === undefined) parameters = [];
     return {
         err: true,

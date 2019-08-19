@@ -25,8 +25,8 @@ window.onload = setEventHandlers;
  * Sets event handlers to proper elements.
  */
 function setEventHandlers() {
-    document.getElementById('searchQuerySubmit').addEventListener("click", searchButtonClicked);
-    document.getElementById("searchQueryInput").addEventListener("keydown", enterPressed);
+    document.getElementById('searchQuerySubmit').addEventListener('click', searchButtonClicked);
+    document.getElementById('searchQueryInput').addEventListener('keydown', enterPressed);
 }
 
 
@@ -35,7 +35,7 @@ function setEventHandlers() {
  */ 
 function searchButtonClicked() {
     setSearchButtonText('Searching');
-    getResults(document.getElementById("searchQueryInput").value, 1);
+    getResults(document.getElementById('searchQueryInput').value, 1);
 }
 
 
@@ -45,8 +45,6 @@ function searchButtonClicked() {
 function enterPressed(e) {
     if (!e) e = window.event;
         
-    //e.preventDefault();
-
     // enter is pressed
     if (e.keyCode == 13) {
         getResults(this.value, 1);
@@ -59,13 +57,13 @@ function enterPressed(e) {
  */
 function getResults(searchQueryInput, startIndex) {
 
-    if (searchQueryInput === "" || searchQueryInput === undefined) {
+    if (searchQueryInput === '' || searchQueryInput === undefined) {
         setSearchButtonText(defaultSearchButtonValue);
         return;
     }
 
-    cq.QueryWeb(searchQueryInput, displayWebResults, startIndex, PG_WEB_ITEMS_PER_PAGE);
-    cq.QueryImg(searchQueryInput, displayImgResults, startIndex, PG_IMG_ITEMS_PER_PAGE);
+    cq.queryWeb(searchQueryInput, displayWebResults, startIndex, PG_WEB_ITEMS_PER_PAGE);
+    cq.queryImg(searchQueryInput, displayImgResults, startIndex, PG_IMG_ITEMS_PER_PAGE);
 
     return;
 }
@@ -78,7 +76,7 @@ function getResults(searchQueryInput, startIndex) {
 function getWebResultPage(pageNo) {
     if (pageNo === undefined || pageNo < 1) pageNo = 1;
     var startIndex = ((pageNo - 1) * PG_WEB_ITEMS_PER_PAGE) + 1;
-    cq.GetWebResultsFromIndex(startIndex, PG_WEB_ITEMS_PER_PAGE, displayWebResults);
+    cq.getWebResultsFromIndex(startIndex, PG_WEB_ITEMS_PER_PAGE, displayWebResults);
 }
 
 
@@ -276,7 +274,6 @@ function newImage(title, thumbnaillink, link) {
 function resultIsOk(result) {
     if (
         result === undefined || 
-        //result.queries === undefined || 
         result.items === undefined ||
         result.searchInformation === undefined
     ) return false;
